@@ -1,0 +1,52 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: ReLoop AI - serverless backend (S3, Lambda, API Gateway, DynamoDB, Rekognition)
+Parameters:
+  AllowedOrigin:
+    Type: String
+    Default: '*'
+    Description: Frontend origin allowed by CORS (e.g. https://user.github.io). '*' for testing.
+Resources:
+  ScanBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      PublicAccessBlockConfiguration: {BlockPublicAcls: true, BlockPublicPolicy: true, IgnorePublicAcls: true, RestrictPublicBuckets: true}
+      LifecycleConfiguration:
+        Rules: [{Id: expire-scans, Status: Enabled, ExpirationInDays: 7}]
+  ListingsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions: [{AttributeName: id, AttributeType: S}]
+      KeySchema: [{AttributeName: id, KeyType: HASH}]
+  Api:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      DefaultRouteSettings:
+        ThrottlingBurstLimit: 10
+        ThrottlingRateLimit: 5
+      CorsConfiguration:
+        AllowOrigins: [!Ref AllowedOrigin]
+        AllowMethods: [GET, POST, PATCH, OPTIONS]
+        AllowHeaders: [Content-Type]
+  Fn:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/
+      Handler: app.handler
+      Runtime: python3.12
+      Timeout: 20
+      MemorySize: 256
+      Environment:
+        Variables: {TABLE: !Ref ListingsTable, BUCKET: !Ref ScanBucket}
+      Policies:
+        - S3CrudPolicy: {BucketName: !Ref ScanBucket}
+        - DynamoDBCrudPolicy: {TableName: !Ref ListingsTable}
+        - Statement: [{Effect: Allow, Action: rekognition:DetectLabels, Resource: '*'}]
+      Events:
+        Any:
+          Type: HttpApi
+          Properties: {ApiId: !Ref Api, Path: '/{proxy+}', Method: ANY}
+Outputs:
+  ApiUrl:
+    Value: !Sub 'https://${Api}.execute-api.${AWS::Region}.amazonaws.com'

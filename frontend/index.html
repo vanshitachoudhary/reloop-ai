@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b2a1a">
+<title>ReLoop AI · Scan it. Sort it. Recover its value.</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌱%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+:root{--bg:#f4f3ea;--surf:#fff;--ink:#0f2418;--mut:#5f6f64;--line:#e4e6d9;--forest:#0b2a1a;--g:#14513a;--lime:#b8f43c;--lime-d:#8fcb12;--warn:#fff4d6;--warnink:#6b4a00;--sh:0 1px 2px rgba(11,42,26,.06),0 8px 24px rgba(11,42,26,.07);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#08150e;--surf:#10231a;--ink:#edf3e6;--mut:#9db0a2;--line:#1f3a2b;--g:#b8f43c;--warn:#3a2e0c;--warnink:#ffe19a;--sh:0 1px 2px #0006,0 8px 24px #0005}}
+:root[data-theme="dark"]{--bg:#08150e;--surf:#10231a;--ink:#edf3e6;--mut:#9db0a2;--line:#1f3a2b;--g:#b8f43c;--warn:#3a2e0c;--warnink:#ffe19a;--sh:0 1px 2px #0006,0 8px 24px #0005}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backdrop-filter:blur(14px);background:rgba(11,42,26,.88);color:#f4f3ea;border-bottom:1px solid #ffffff14}
+.bar{max-width:1120px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:20px}
+.brand{font-weight:800;font-size:19px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px;cursor:pointer}
+.brand i{width:30px;height:30px;border-radius:9px;background:var(--lime);display:grid;place-items:center;color:var(--forest);font-style:normal;font-size:16px}
+.brand b{color:var(--lime)}
+.nav{display:flex;gap:2px;margin-left:12px}.nav button{background:none;border:0;color:#c5d8c9;padding:8px 14px;border-radius:10px;font:500 14px Inter,sans-serif;cursor:pointer;transition:.15s}
+.nav button:hover{color:#fff;background:#ffffff12}.nav button.on{background:#ffffff1c;color:#fff}
+.pill{margin-left:auto;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--lime);border:1px solid #b8f43c55;background:#b8f43c14;padding:4px 10px;border-radius:99px;display:flex;align-items:center;gap:6px}
+.pill:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--lime);animation:pulse 2s infinite}@keyframes pulse{50%{opacity:.3}}
+.tabs{display:none}
+main{max-width:1120px;margin:auto;padding:24px 20px 60px}
+.view{display:none;animation:in .35s ease}.view.on{display:block}@keyframes in{from{opacity:0;transform:translateY(8px)}}
+h2{font-size:28px;letter-spacing:-.03em;margin:0 0 4px}.sub{color:var(--mut);margin:0 0 20px}
+.hero{position:relative;overflow:hidden;border-radius:28px;padding:56px 40px;background:radial-gradient(900px 400px at 85% -10%,#1f7a4f 0,transparent 60%),radial-gradient(600px 300px at 0 100%,#b8f43c26,transparent 60%),var(--forest);color:#f4f3ea;display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center}
+.hero h1{font-size:clamp(34px,5.4vw,60px);line-height:1.02;letter-spacing:-.04em;margin:14px 0}.hero h1 em{font-style:normal;color:var(--lime)}
+.hero p{color:#c5d8c9;font-size:17px;max-width:480px;margin:0 0 26px}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:600;color:var(--lime);background:#b8f43c14;border:1px solid #b8f43c40;padding:5px 12px;border-radius:99px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:12px 20px;font:700 14px Inter,sans-serif;cursor:pointer;background:var(--lime);color:var(--forest);transition:.15s;box-shadow:0 6px 18px #b8f43c33}
+.btn:hover{transform:translateY(-1px);background:#c7ff52}.btn:active{transform:none}.btn[disabled]{opacity:.5;cursor:wait}
+.btn.ghost{background:#ffffff14;color:#fff;box-shadow:none;border:1px solid #ffffff2e}.btn.ghost:hover{background:#ffffff22}
+.btn.sm{padding:8px 14px;font-size:13px;box-shadow:none}.btn.line{background:transparent;border:1px solid var(--line);color:var(--ink);box-shadow:none}
+.mock{background:#ffffff0f;border:1px solid #ffffff22;border-radius:20px;padding:18px;backdrop-filter:blur(8px);transform:rotate(2deg)}
+.mock .row{display:flex;justify-content:space-between;font-size:13px;color:#c5d8c9;padding:6px 0}.mock .big{font-size:26px;font-weight:800;color:#fff}
+.mock .meter{height:8px;border-radius:9px;background:#ffffff1f;margin:10px 0}.mock .meter i{display:block;height:100%;width:93%;border-radius:9px;background:var(--lime)}
+.grid{display:grid;gap:16px}.g4{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--sh)}
+.card h3{margin:0 0 12px;font-size:16px;letter-spacing:-.01em}
+.stat .l{color:var(--mut);font-size:13px;font-weight:500}.stat .v{font-size:34px;font-weight:800;letter-spacing:-.04em;color:var(--g);line-height:1.15;margin:4px 0}.stat .n{font-size:12px;color:var(--mut)}
+.ico{width:40px;height:40px;border-radius:12px;background:#b8f43c33;color:var(--g);display:grid;place-items:center;margin-bottom:12px}
+.how .t{font-weight:700;margin-bottom:4px}.how p{margin:0;color:var(--mut);font-size:14px}
+.note{font-size:12.5px;color:var(--mut);margin-top:14px}
+label{display:block;font-size:12.5px;font-weight:600;color:var(--mut);margin:14px 0 6px}
+input,select{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);font:inherit;outline:0;transition:.15s}
+input:focus,select:focus{border-color:var(--lime-d);box-shadow:0 0 0 3px #b8f43c40}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.drop{border:2px dashed var(--line);border-radius:18px;padding:28px 16px;text-align:center;cursor:pointer;display:block;color:var(--mut);transition:.15s}
+.drop:hover,.drop.over{border-color:var(--lime-d);background:#b8f43c14}.drop svg{width:32px;height:32px;margin-bottom:6px;color:var(--g)}
+.drop img{max-width:100%;max-height:230px;border-radius:12px}.drop input{display:none}
+.chip{display:inline-block;font-size:12px;font-weight:600;padding:4px 10px;border-radius:99px;background:var(--bg);border:1px solid var(--line);margin:0 6px 6px 0}
+.chip.demo{background:#b8f43c26;border-color:#b8f43c66}
+.res{display:flex;gap:18px;align-items:center;margin-bottom:12px}.ring{position:relative;width:84px;height:84px;flex:none}.ring svg{width:84px;height:84px;transform:rotate(-90deg);stroke-width:7}
+.ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:18px}
+.cat{font-size:26px;font-weight:800;letter-spacing:-.03em}
+.warn{background:var(--warn);color:var(--warnink);padding:10px 14px;border-radius:12px;font-size:13.5px;margin:12px 0}
+.empty{color:var(--mut);text-align:center;padding:40px 10px}
+.rec{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.rec:last-child{border:0}.rec b{display:block}
+.pk{padding:18px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1.3fr 1.5fr auto;gap:16px;align-items:center}.pk:last-child{border:0}
+.step{display:flex;align-items:center}.step span{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-size:11px;font-weight:700;background:var(--surf);flex:none}
+.step span.on{background:var(--lime);border-color:var(--lime);color:var(--forest)}.step hr{flex:1;border:0;height:2px;background:var(--line);margin:0}.step hr.on{background:var(--lime)}
+.lab{display:flex;justify-content:space-between;font-size:11px;color:var(--mut);margin-top:4px}
+.bars p{margin:0 0 12px;font-size:13px}.track{height:10px;border-radius:9px;background:var(--line);overflow:hidden;margin-top:5px}.track i{display:block;height:100%;border-radius:9px;transition:width .6s}
+.donut{width:150px;height:150px;border-radius:50%;margin:auto;display:grid;place-items:center}.donut div{width:98px;height:98px;border-radius:50%;background:var(--surf);display:grid;place-items:center;text-align:center;font-weight:800;font-size:20px;line-height:1.1}
+.lb{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line)}.lb:last-child{border:0}.lb.me{font-weight:700;color:var(--g)}
+#toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);background:var(--forest);color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:50;box-shadow:var(--sh)}#toast.on{opacity:1;transform:translate(-50%,0)}
+.spin{display:inline-block;width:16px;height:16px;border:2px solid #0b2a1a44;border-top-color:var(--forest);border-radius:50%;animation:r .7s linear infinite}@keyframes r{to{transform:rotate(360deg)}}
+.filters{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}.fl{border:1px solid var(--line);background:var(--surf);color:var(--ink);border-radius:99px;padding:6px 14px;font:600 13px Inter,sans-serif;cursor:pointer}.fl.on{background:var(--forest);color:var(--lime);border-color:var(--forest)}
+.badges{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}.bd{border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center;font-size:12px;color:var(--mut)}.bd b{display:block;color:var(--ink);font-size:13px}.bd.on{background:#b8f43c26;border-color:#b8f43c88}.bd.off{opacity:.55}.bd i{font-style:normal;font-size:22px;display:block}
+.spark{display:flex;align-items:flex-end;gap:8px;height:120px}.spark div{flex:1;text-align:center;font-size:11px;color:var(--mut);display:flex;flex-direction:column;justify-content:flex-end;height:100%}.spark i{display:block;border-radius:6px 6px 2px 2px;background:var(--g);min-height:3px;margin-bottom:4px}
+.hist{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13.5px}.hist:last-child{border:0}
+.tg{background:#ffffff14;border:1px solid #ffffff22;color:#fff;border-radius:10px;width:36px;height:36px;cursor:pointer;flex:none;font-size:16px}
+.gd .no{font-size:13px;color:#b3412f;margin:8px 0 0}.rt{padding-left:20px;margin:0}.rt li{margin:6px 0}
+#map{position:relative;z-index:0;isolation:isolate}footer{text-align:center;color:var(--mut);font-size:12.5px;padding:10px 20px 30px}
+@media(max-width:820px){
+.nav,.pill span{display:none}.hero{grid-template-columns:1fr;padding:34px 22px}.mock{display:none}.two{grid-template-columns:1fr}
+.pk{grid-template-columns:1fr}main{padding:16px 16px 100px}
+.tabs{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surf);border-top:1px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))}
+.tabs button{flex:1;background:none;border:0;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:2px;font:600 10.5px Inter,sans-serif;padding:6px 0;cursor:pointer}.tabs button.on{color:var(--g)}
+:root{padding-bottom:0}}
+</style></head><body>
+<header><div class="bar"><div class="brand" onclick="go('home')"><i>♻</i><span>Re<b>Loop</b> AI</span></div><div class="nav" id="nav"></div><div class="pill"><span id="mode"></span></div><button class="tg" id="theme" aria-label="Toggle light or dark theme">◐</button></div></header>
+<main>
+<section class="view on" id="v-home">
+ <div class="hero"><div><span class="eyebrow">♻ AI-powered circular economy</span>
+ <h1>Scan it. Sort it. <em>Recover its value.</em></h1>
+ <p>Photograph any waste, get the right category and disposal advice, match with a recycler and track the impact of every kilo you recover.</p>
+ <button class="btn" onclick="go('scan')">Scan waste</button> <button class="btn ghost" onclick="go('dash')">View impact</button></div>
+ <div class="mock"><div class="row"><span>Detected</span><span>Amazon Rekognition</span></div><div class="big">Plastic bottle</div><div class="meter"><i></i></div><div class="row"><span>Confidence</span><b style="color:#fff">93%</b></div><div class="row"><span>Next step</span><b style="color:var(--lime)">Rinse &amp; list for pickup →</b></div></div></div>
+ <div class="grid g4" id="hs" style="margin-top:20px"></div>
+ <p class="note" id="hnote"></p>
+ <h2 style="margin-top:34px">How it works</h2><p class="sub">From a photo to a completed pickup in four steps.</p>
+ <div class="grid g4 how" id="how"></div>
+ <div class="card" style="margin-top:20px"><h3>Honest notes about this demo</h3><p class="note" style="margin:0">Recycler records are demonstration data, not real partners. The scanner uses a general-purpose image model (Amazon Rekognition), so uncertain results ask you to confirm the category. Value and CO₂ figures are indicative estimates. Impact counts only completed pickups from saved listings. CO₂ factors are rough demo assumptions; tree equivalents use about 25 kg per tree per year (published figures range from 10 to 40).</p></div>
+</section>
+
+<section class="view" id="v-scan"><h2>Waste scanner</h2><p class="sub">Upload a photo. The model suggests a category; you can always override it.</p>
+ <div class="grid g2"><div class="card"><h3>1 · Photo</h3>
+  <label class="drop" id="drop"><input type="file" id="file" accept="image/*" capture="environment"><span id="dropIn"><svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><br><b>Tap to upload or drop a photo</b><br><small>JPG / PNG, resized in your browser before upload</small></span></label>
+  <label>Category</label><select id="cat"></select>
+  <div style="margin-top:16px"><button class="btn" id="goBtn" onclick="analyse()">Analyse</button></div></div>
+ <div class="card" id="result"><h3>2 · Result</h3><div class="empty">Your analysis will appear here.</div></div></div>
+ <div class="card" style="margin-top:16px"><h3>Recent scans <span class="chip">on this device</span></h3><div id="hist"></div></div></section>
+
+<section class="view" id="v-market"><h2>Waste marketplace</h2><p class="sub">List recoverable waste and get matched with a recycler.</p>
+ <div class="grid g2"><div class="card"><h3>New listing</h3>
+  <label>Item</label><input id="lItem" maxlength="80" placeholder="e.g. Cardboard boxes">
+  <div class="two"><div><label>Category</label><select id="lCat" onchange="est();autoZone()"></select></div><div><label>Weight (kg)</label><input id="lQty" oninput="est()" type="number" min="0.5" max="5000" step="0.5" value="10"></div></div>
+  <label>Location</label><input id="lLoc" maxlength="80" placeholder="e.g. Acropolis campus, Indore">
+  <label>Distance to recycler</label><select id="lZone"><option value="1">Within 3 km</option><option value="2" selected>3–8 km</option><option value="3">8–15 km</option></select>
+  <p class="note" id="lEst"></p><div style="margin-top:12px"><button class="btn" onclick="addListing()">Create listing &amp; match</button></div><p class="note" id="lMsg"></p></div>
+  <div class="card"><h3>Recyclers <span class="chip demo">demo records</span></h3><div id="recs"></div><button class="btn sm" onclick="locate()" style="margin:6px 0 12px">Use my location</button><div id="map" style="height:260px;border-radius:14px;overflow:hidden"></div><p class="note">Demonstration records placed around Indore for illustration. No real partnerships are claimed. Your location stays in your browser.</p></div></div></section>
+
+<section class="view" id="v-pick"><h2>Pickups</h2><p class="sub">Move each pickup forward. Only completed pickups count as impact.</p><div class="filters"><input id="q" placeholder="Search pickups" oninput="render()" style="max-width:260px"><select id="rv" onchange="render()" style="max-width:260px"></select></div><div class="filters" id="flt"></div><div class="card" id="pk"></div><div class="card" id="route" style="margin-top:16px"></div></section>
+
+<section class="view" id="v-dash"><h2>Impact dashboard</h2><p class="sub">Live numbers from saved listings. Demo rows are labelled.</p>
+ <div class="grid g4" id="ds"></div>
+ <div class="grid g2" style="margin-top:16px"><div class="card"><h3>Recovered by category <span class="chip demo">incl. demo</span></h3><div class="grid" style="grid-template-columns:150px 1fr;align-items:center;gap:20px"><div class="donut" id="donut"><div id="dTot"></div></div><div class="bars" id="bars"></div></div></div>
+ <div class="card"><h3>Campus challenge <span class="chip demo">demo</span></h3><div id="lb"></div><p class="note">You earn 10 EcoScore points per kg, only from completed saved pickups.</p></div></div>
+ <div class="grid g2" style="margin-top:16px"><div class="card"><h3>Last 7 days <span class="chip">verified only</span></h3><div class="spark" id="spark"></div></div><div class="card"><h3>Badges</h3><div class="badges" id="badges"></div></div></div>
+ <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap"><button class="btn sm" onclick="exportCsv()">Export CSV report</button><button class="btn sm line" onclick="shareImpact()">Share my impact</button><button class="btn sm line" onclick="certificate()">Download certificate</button></div></section>
+<section class="view" id="v-guide"><h2>Disposal guide</h2><p class="sub">Quick preparation tips for each waste type.</p><div class="grid g2" id="gd"></div></section>
+</main>
+<footer>ReLoop AI · MIT licensed · CO₂ figures are indicative estimates, not audited.</footer>
+<div class="tabs" id="tabs"></div><div id="toast"></div>
+<script src="config.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const esc=t=>String(t).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const IC={home:'<path d="M3 10.5 12 3l9 7.5V21H3z"/>',scan:'<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',market:'<path d="M3 9l1-5h16l1 5M4 9v11h16V9"/><path d="M9 20v-6h6v6"/>',pick:'<path d="M2 6h11v9H2zM13 9h4l3 3v3h-7"/><circle cx="6" cy="17" r="1.8"/><circle cx="17" cy="17" r="1.8"/>',dash:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',guide:'<path d="M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4z"/><path d="M8 20a4 4 0 0 1-4-4"/>'};
+const ic=n=>`<svg viewBox="0 0 24 24">${IC[n]}</svg>`;
+const V=[['home','Home'],['scan','Scan'],['market','Market'],['pick','Pickups'],['dash','Impact'],['guide','Guide']];
+$('nav').innerHTML=V.map(v=>`<button data-v="${v[0]}" onclick="go('${v[0]}')">${v[1]}</button>`).join('');
+$('tabs').innerHTML=V.map(v=>`<button data-v="${v[0]}" onclick="go('${v[0]}')">${ic(v[0])}${v[1]}</button>`).join('');
+$('how').innerHTML=[['scan','Scan','Upload a photo and get the waste category with confidence.'],['market','List','Add weight and location. Data is saved to DynamoDB.'],['pick','Match & collect','Matched to a recycler by waste type and distance.'],['dash','Measure','Impact counts only completed pickups.']].map(h=>`<div class="card"><div class="ico">${ic(h[0])}</div><div class="t">${h[1]}</div><p>${h[2]}</p></div>`).join('');
+function go(v){document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));document.querySelectorAll('[data-v]').forEach(b=>b.classList.toggle('on',b.dataset.v===v));render();scrollTo({top:0,behavior:'smooth'})}
+let tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600)}
+
+const C={
+plastic:{n:'Plastic',v:12,co2:1.5,col:'#2f9e6b',tip:'Rinse, remove caps and labels, flatten bottles. Resin codes 1 (PET) and 2 (HDPE) recycle best.',w:''},
+paper:{n:'Paper / Cardboard',v:8,co2:.9,col:'#d4a72c',tip:'Keep dry and flat-folded. Remove tape and food-soiled parts.',w:'Greasy or wet paper cannot be recycled.'},
+metal:{n:'Metal',v:25,co2:4,col:'#5b7fa6',tip:'Rinse cans and separate aluminium from steel where possible.',w:'Handle sharp edges with gloves.'},
+glass:{n:'Glass',v:3,co2:.3,col:'#44b3c2',tip:'Rinse and sort by colour. Do not mix with ceramics or mirrors.',w:'Wrap broken glass in paper and label it.'},
+ewaste:{n:'E-waste',v:30,co2:2,col:'#b8f43c',tip:'Never bin it. Hand over to an authorised e-waste collector.',w:'Contains toxic materials and batteries. Do not open, burn or crush.'}};
+const R=[{n:'GreenCycle Hub',acc:['plastic','paper'],z:1,lat:22.7241,lng:75.8839},{n:'MetalMart Scrap',acc:['metal'],z:2,lat:22.7533,lng:75.8937},{n:'EcoE Recyclers',acc:['ewaste'],z:3,lat:22.6708,lng:75.8333},{n:'ClearGlass Works',acc:['glass','plastic'],z:2,lat:22.7010,lng:75.8700},{n:'PaperLoop Co-op',acc:['paper'],z:2,lat:22.7410,lng:75.8410}];
+const ST=['Matched','Scheduled','Completed'];
+const DEMO=[{id:'d1',i:'Cardboard · college dept.',c:'paper',q:40,r:'PaperLoop Co-op',s:2,d:1},{id:'d2',i:'PET bottles · canteen',c:'plastic',q:25,r:'GreenCycle Hub',s:2,d:1},{id:'d3',i:'Scrap aluminium',c:'metal',q:15,r:'MetalMart Scrap',s:2,d:1}];
+const opts=Object.keys(C).map(k=>`<option value="${k}">${C[k].n}</option>`).join('');
+$('cat').innerHTML='<option value="">Select manually…</option>'+opts;$('lCat').innerHTML=opts;
+
+let DB=[],L=[],img=null,API=(window.RELOOP_API||'').replace(/\/$/,'');
+const J={'Content-Type':'application/json'};
+const api={on:!!API,
+ async scan(b){const d=await new Promise(r=>{const f=new FileReader();f.onload=()=>r(f.result.split(',')[1]);f.readAsDataURL(b)});const r=await fetch(API+'/scan',{method:'POST',headers:J,body:JSON.stringify({image:d})});if(!r.ok)throw 0;return r.json()},
+ async list(){if(API){const r=await fetch(API+'/listings');if(!r.ok)throw 0;return r.json()}try{return JSON.parse(localStorage.getItem('reloop')||'[]')}catch(e){return[]}},
+ async save(l){try{localStorage.setItem('reloop',JSON.stringify(l))}catch(e){}},
+ async add(rec){if(API){const r=await fetch(API+'/listings',{method:'POST',headers:J,body:JSON.stringify(rec)});if(!r.ok)throw 0;return}const l=await this.list();l.unshift({...rec,id:'l'+Date.now()});await this.save(l)},
+ async adv(id,s,sd){if(API){const r=await fetch(API+'/listings/'+id,{method:'PATCH',headers:J,body:JSON.stringify({s,sd})});if(!r.ok)throw 0;return}const l=await this.list();const x=l.find(y=>y.id===id);if(x){x.s=s;if(sd)x.sd=sd;if(s===2)x.ct=Date.now()}await this.save(l)}};
+async function reload(){try{DB=(await api.list()).map(x=>({...x,d:0}))}catch(e){}L=[...DB,...DEMO];render()}
+
+async function shrink(f){const b=await createImageBitmap(f),sc=Math.min(1,800/Math.max(b.width,b.height)),cv=document.createElement('canvas');cv.width=b.width*sc;cv.height=b.height*sc;cv.getContext('2d').drawImage(b,0,0,cv.width,cv.height);return new Promise(r=>cv.toBlob(r,'image/jpeg',.8))}
+function setImg(f){if(!f||!f.type.startsWith('image/'))return;img=f;$('dropIn').innerHTML=`<img src="${URL.createObjectURL(f)}" alt="preview">`}
+$('file').onchange=e=>setImg(e.target.files[0]);
+const dz=$('drop');['dragover','dragenter'].forEach(e=>dz.addEventListener(e,x=>{x.preventDefault();dz.classList.add('over')}));
+['dragleave','drop'].forEach(e=>dz.addEventListener(e,x=>{x.preventDefault();dz.classList.remove('over');if(e==='drop')setImg(x.dataTransfer.files[0])}));
+let lastInfo=null;
+const alts=info=>info&&info.alts&&info.alts.some(a=>C[a.category])?'<div style="margin-top:10px">'+info.alts.filter(a=>C[a.category]).map(a=>`<button class="fl" onclick="pickAlt('${a.category}')">${C[a.category].n} · ${+a.confidence||0}%</button>`).join(' ')+'</div>':'';
+/* On-device scanner (TensorFlow.js + MobileNet). Used only when no AWS backend is configured, so the live demo works on any static host. */
+const OD={plastic:/water bottle|pop bottle|soda bottle|pill bottle|plastic bag|water jug|bucket|pail|lotion|sunscreen|soap dispenser|measuring cup|packet/i,
+paper:/carton|envelope|paper towel|book jacket|comic book|binder|menu|toilet tissue|crossword/i,
+metal:/milk can|can opener|wok|frying pan|saucepan|caldron|cauldron|ladle|strainer|cocktail shaker|padlock|chain|nail|screw|hammer/i,
+glass:/beer bottle|wine bottle|red wine|beer glass|goblet|vase|whiskey jug|perfume|pitcher/i,
+ewaste:/cellular telephone|cell phone|ipod|laptop|notebook|desktop computer|monitor|\bscreen\b|television|\bmouse\b|computer keyboard|remote control|hand-held computer|modem|joystick|printer|loudspeaker|speaker|digital watch|cd player|radio|hard disc|dial telephone|pay-phone|projector|camera|digital clock|power drill|electric fan|space bar/i};
+function mapPreds(preds){const sc={};preds.forEach(p=>{for(const c in OD)if(OD[c].test(p.className))sc[c]=(sc[c]||0)+p.probability*100});
+ const rk=Object.entries(sc).sort((a,b)=>b[1]-a[1]),names=preds.map(p=>p.className.split(',')[0]),src='On-device AI (TensorFlow.js)';
+ const base={item:names[0]||'',labels:names.slice(0,5),src,alts:rk.slice(0,3).map(([c,v])=>({category:c,confidence:Math.min(99,Math.round(v))}))};
+ if(!rk.length||rk[0][1]<15)return{...base,category:'unknown',confidence:0,review:true};
+ return{...base,category:rk[0][0],confidence:Math.min(99,Math.round(rk[0][1])),review:rk[0][1]<60||(rk.length>1&&rk[0][1]-rk[1][1]<10)}}
+const loadJS=u=>new Promise((res,rej)=>{const e=document.createElement('script');e.src=u;e.onload=res;e.onerror=rej;document.head.appendChild(e)});
+let mnet=null;
+async function localScan(f){
+ if(!mnet){await loadJS('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js');await loadJS('https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js');mnet=await mobilenet.load({version:1,alpha:1.0})}
+ const b=await createImageBitmap(f),cv=document.createElement('canvas');cv.width=224;cv.height=224;cv.getContext('2d').drawImage(b,0,0,224,224);
+ return mapPreds(await mnet.classify(cv,5))}
+async function analyse(){
+ const out=$('result'),btn=$('goBtn');let k=$('cat').value,info=null;
+ if(!img&&!k){toast('Upload a photo or choose a category');return}
+ if(img&&api.on){btn.disabled=true;out.innerHTML='<h3>2 · Result</h3><div class="empty"><span class="spin"></span><br>Amazon Rekognition is analysing…</div>';
+  try{info=await api.scan(await shrink(img));if(info&&C[info.category]){k=info.category;$('cat').value=k}}
+  catch(e){out.innerHTML='<h3>2 · Result</h3><div class="empty">AI scan is unavailable right now.<br>Choose the category manually and press Analyse again.</div>';btn.disabled=false;return}
+  btn.disabled=false}
+ else if(img&&!k){btn.disabled=true;out.innerHTML='<h3>2 · Result</h3><div class="empty"><span class="spin"></span><br>On-device AI is analysing… (first run downloads a small model)</div>';
+  try{info=await localScan(img);if(info&&C[info.category]){k=info.category;$('cat').value=k}}
+  catch(e){out.innerHTML='<h3>2 · Result</h3><div class="empty">On-device AI could not load (internet needed once).<br>Choose the category manually and press Analyse again.</div>';btn.disabled=false;return}
+  btn.disabled=false}
+ lastInfo=info;
+ if(!k){out.innerHTML='<h3>2 · Result</h3><div class="empty">Not sure what this is.<br>'+(alts(info)?'Is it one of these?':'Please choose the category manually.')+alts(info)+'</div>';return}
+ show(k,info,!!(info&&info.category===k),true)}
+function pickAlt(k){$('cat').value=k;show(k,lastInfo,false,false)}
+function show(k,info,ai,log){
+ const out=$('result'),c=C[k],cf=ai?Math.max(0,Math.min(100,+info.confidence||0)):0,R2=34,CI=2*Math.PI*R2;
+ if(log){pushHist(k,cf,ai);renderHist()}lastScan={k,item:ai&&info.item?String(info.item).slice(0,60):''};
+ out.innerHTML=`<h3>2 · Result</h3><div class="res">${ai?`<div class="ring"><svg viewBox="0 0 84 84"><circle cx="42" cy="42" r="${R2}" stroke="var(--line)"/><circle cx="42" cy="42" r="${R2}" stroke="var(--lime-d)" stroke-dasharray="${CI*cf/100} ${CI}"/></svg><b>${cf}%</b></div>`:''}<div><div class="cat">${c.n}</div><span class="chip ${ai?'':'demo'}">${ai?esc(info.src||'Amazon Rekognition'):'Selected manually'}</span>${ai&&info.labels?info.labels.slice(0,3).map(l=>`<span class="chip">${esc(l)}</span>`).join(''):''}</div></div>
+ ${ai&&info.review?`<div class="warn">Low certainty. Please confirm or change the category.${alts(info)}</div>`:''}
+ <p><b>What to do:</b> ${esc(c.tip)}</p><p><span class="chip">≈ ₹${c.v}/kg</span><span class="chip">≈ ${c.co2} kg CO₂ saved per kg</span></p>
+ ${c.w?`<div class="warn">⚠ ${esc(c.w)}</div>`:''}<button class="btn sm" onclick="useScan()">List this waste →</button>`}
+
+const match=(c,z)=>{const m=R.filter(r=>r.acc.includes(c));return userPos?m.sort((a,b)=>dist(a)-dist(b))[0]:m.sort((a,b)=>Math.abs(a.z-z)-Math.abs(b.z-z))[0]};
+async function addListing(){
+ const i=$('lItem').value.trim(),q=+$('lQty').value,c=$('lCat').value,z=+$('lZone').value,loc=$('lLoc').value.trim().slice(0,80);
+ if(!i||!(q>0&&q<=5000)){$('lMsg').textContent='Enter an item and a weight between 0.5 and 5000 kg.';return}
+ const r=match(c,z),rec={i:i.slice(0,80)+(loc?` · ${loc}`:''),c,q,z,r:r.n,s:0,t:Date.now()};
+ try{await api.add(rec);await reload();$('lItem').value='';$('lMsg').textContent='';toast(`Saved · matched with ${r.n}`);go('pick')}catch(e){$('lMsg').textContent='Could not save. Please try again.'}}
+async function adv(id){const l=L.find(x=>x.id===id);if(!l||l.d||l.s>=2)return;try{await api.adv(id,l.s+1,l.s===0?(slotSel[id]||slots()[0]):undefined);await reload();toast(l.s+1===2?'Pickup completed · impact updated':'Status updated')}catch(e){toast('Update failed')}}
+
+function stats(){const f=L.filter(l=>l.s===2),re=f.filter(l=>!l.d);return{kg:f.reduce((a,l)=>a+l.q,0),vkg:re.reduce((a,l)=>a+l.q,0),co2:f.reduce((a,l)=>a+l.q*C[l.c].co2,0),pend:L.filter(l=>l.s<2).length,f,listed:DB.reduce((a,l)=>a+l.q,0)}}
+const kpi=(l,v,n)=>`<div class="card stat"><div class="l">${l}</div><div class="v">${v}</div><div class="n">${n||''}</div></div>`;
+function render0(){
+ const a=stats(),fx=n=>Math.round(n*10)/10;
+ $('mode').textContent=api.on?(window.RELOOP_LOCAL?'Local dev · in-memory':'Live · AWS'):'Demo · browser';
+ $('hs').innerHTML=kpi('Waste recovered',fx(a.kg)+' kg','incl. demo records')+kpi('CO₂ avoided',Math.round(a.co2)+' kg','indicative estimate')+kpi('Pending pickups',a.pend,'awaiting collection')+kpi('Verified recovery',fx(a.vkg)+' kg','completed, saved listings');
+ $('hnote').textContent='Verified = completed pickups from real saved listings. Demo records are labelled and shown separately.';
+ $('recs').innerHTML=R.map(r=>`<div class="rec"><div><b>${r.n}</b><span class="note" style="margin:0">Zone ${r.z} · ${r.acc.map(x=>C[x].n).join(', ')}</span></div><span class="chip demo">demo</span></div>`).join('');
+ const qv=$('q').value.toLowerCase(),rv=$('rv').value,LV=L.filter(l=>(flt==='all'||(flt==='active'?l.s<2:l.s===2))&&(!qv||(l.i+' '+l.r).toLowerCase().includes(qv))&&(!rv||l.r===rv));$('pk').innerHTML=LV.length?LV.map(l=>`<div class="pk"><div><b>${esc(l.i)}</b>${l.d?' <span class="chip demo">demo</span>':''}<div class="note" style="margin:2px 0 0">${C[l.c].n} · ${l.q} kg · ${esc(l.r)}${l.sd?' · 📅 '+esc(l.sd):''}</div></div>
+ <div><div class="step">${[0,1,2].map(n=>`${n?`<hr class="${l.s>=n?'on':''}">`:''}<span class="${l.s>=n?'on':''}">${l.s>=n?'✓':n+1}</span>`).join('')}</div><div class="lab">${ST.map(s=>`<span>${s}</span>`).join('')}</div></div>
+ <div>${l.d?'':l.s<2?(l.s===0?`<select id="sl-${l.id}" onchange="slotSel['${l.id}']=this.value" style="margin-bottom:8px">${slots().map(o=>`<option ${slotSel[l.id]===o?'selected':''}>${o}</option>`).join('')}</select><br>`:'')+`<button class="btn sm" onclick="adv('${l.id}')">${l.s===0?'Schedule pickup':'Mark completed'}</button>`:'<span class="chip demo">Counted</span>'}</div></div>`).join(''):'<div class="empty">No pickups yet.</div>';
+ $('ds').innerHTML=kpi('Listed (saved)',fx(a.listed)+' kg',DB.length+' real listings')+kpi('Recovered',fx(a.kg)+' kg','completed · incl. demo records')+kpi('Pending',a.pend,'pickups in progress')+kpi('CO₂ avoided',Math.round(a.co2)+' kg','≈ '+Math.round(a.co2/25)+' trees\' yearly absorption (~25 kg/tree, est.)');
+ const by={};Object.keys(C).forEach(k=>by[k]=0);a.f.forEach(l=>by[l.c]+=l.q);const tot=Object.values(by).reduce((x,y)=>x+y,0),mx=Math.max(1,...Object.values(by));
+ let acc=0;const seg=tot?Object.keys(by).filter(k=>by[k]).map(k=>{const s=acc,e=acc+by[k]/tot*100;acc=e;return `${C[k].col} ${s}% ${e}%`}).join(','):'var(--line) 0 100%';
+ $('donut').style.background=`conic-gradient(${seg})`;$('dTot').innerHTML=`${fx(tot)}<br><small style="font-size:11px;color:var(--mut);font-weight:500">kg</small>`;
+ $('bars').innerHTML=Object.keys(by).map(k=>`<p><b>${C[k].n}</b> <span style="color:var(--mut)">· ${fx(by[k])} kg</span><div class="track"><i style="width:${by[k]/mx*100}%;background:${C[k].col}"></i></div></p>`).join('');
+ const b=[{n:'Acropolis',p:1200,d:1},{n:'IET DAVV',p:900,d:1},{n:'SGSITS',p:760,d:1},{n:'You',p:Math.round(a.vkg*10)}].sort((x,y)=>y.p-x.p);
+ $('lb').innerHTML=b.map((x,i)=>`<div class="lb ${x.n==='You'?'me':''}"><span>${i+1}. ${x.n}${x.d?' <span class="chip demo">demo</span>':''}</span><span>${x.p} pts</span></div>`).join('')}
+let flt='all';
+const NO={plastic:'Greasy takeaway boxes, mixed-material pouches',paper:'Wet, greasy or wax-coated paper',metal:'Aerosol cans with contents, paint cans with paint',glass:'Ceramics, mirrors, light bulbs',ewaste:'Swollen or leaking batteries: keep separate and call a collector'};
+const HK='reloop_scans',hist=()=>{try{return JSON.parse(localStorage.getItem(HK)||'[]')}catch(e){return[]}};
+function pushHist(k,cf,ai){const h=hist();h.unshift({k,cf,ai,t:Date.now()});try{localStorage.setItem(HK,JSON.stringify(h.slice(0,8)))}catch(e){}}
+function renderHist(){const h=hist().filter(x=>C[x.k]);$('hist').innerHTML=h.length?h.map(x=>`<div class="hist"><span><b>${C[x.k].n}</b> · ${x.ai?x.cf+'% confidence':'manual'}</span><span style="color:var(--mut)">${new Date(x.t).toLocaleString([],{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</span></div>`).join(''):'<div class="empty">No scans yet.</div>'}
+function est(){const k=$('lCat').value,q=+$('lQty').value;$('lEst').textContent=q>0&&C[k]?`Estimated value ≈ ₹${Math.round(q*C[k].v)} · CO₂ avoided ≈ ${Math.round(q*C[k].co2)} kg (indicative)`:''}
+function render(){render0();extra()}
+function extra(){
+ const a=stats();
+ $('flt').innerHTML=[['all','All'],['active','Active'],['done','Completed']].map(f=>`<button class="fl ${flt===f[0]?'on':''}" onclick="flt='${f[0]}';render()">${f[1]}</button>`).join('');
+ const act=DB.filter(l=>l.s<2).sort((x,y)=>(x.z||2)-(y.z||2));
+ $('route').innerHTML='<h3>Suggested collection route</h3>'+(act.length>1?`<ol class="rt">${act.map(l=>`<li><b>${esc(l.i)}</b> · ${esc(l.r)} · ${['up to 3 km','3–8 km','8–15 km'][(l.z||2)-1]}</li>`).join('')}</ol><p class="note">Ordered nearest first by distance zone. This is not turn-by-turn navigation.</p>`:'<p class="note">Add two or more active listings to see a suggested order.</p>');
+ const days=[...Array(7)].map((_,i)=>{const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-6+i);return d});
+ const sk=days.map(d=>{const s=+d,e=s+864e5;return a.f.filter(l=>!l.d&&l.ct>=s&&l.ct<e).reduce((x,l)=>x+l.q,0)}),sm=Math.max(1,...sk);
+ $('spark').innerHTML=sk.map((v,i)=>`<div title="${v} kg"><i style="height:${v/sm*80}px"></i>${days[i].toLocaleDateString([],{weekday:'short'})}</div>`).join('');
+ const real=a.f.filter(l=>!l.d),cats=new Set(real.map(l=>l.c)).size;
+ $('badges').innerHTML=[['♻','First pickup',real.length>=1],['📸','Scanner',hist().length>=1],['🌱','25 kg club',a.vkg>=25],['🏅','100 kg club',a.vkg>=100],['🌈','3 categories',cats>=3]].map(b=>`<div class="bd ${b[2]?'on':'off'}"><i>${b[0]}</i><b>${b[1]}</b>${b[2]?'Earned':'Locked'}</div>`).join('');
+ $('gd').innerHTML=Object.keys(C).map(k=>`<div class="card gd"><h3>${C[k].n}</h3><p style="color:var(--mut);margin:0">${esc(C[k].tip)}</p>${C[k].w?`<div class="warn">⚠ ${esc(C[k].w)}</div>`:''}<p class="no">Do not include: ${esc(NO[k])}</p><p class="note">Indicative value ≈ ₹${C[k].v}/kg</p></div>`).join('');
+ $('recs').innerHTML=R.map(r=>{const d=dist(r);return `<div class="rec"><div><b>${r.n}</b><span class="note" style="margin:0">${r.acc.map(x=>C[x].n).join(', ')}${d!=null?` · ${d<100?d.toFixed(1):Math.round(d)} km away`:''}</span></div><span class="chip demo">demo</span></div>`}).join('');
+ renderHist();est();loadMap()}
+function exportCsv(){const safe=v=>{v=String(v);return /^[=+\-@]/.test(v)?"'"+v:v};
+ const rows=[['id','item','category','kg','recycler','status','created','completed']].concat(DB.map(l=>[l.id,l.i,C[l.c]?C[l.c].n:l.c,l.q,l.r,ST[l.s],l.t?new Date(l.t).toISOString():'',l.ct?new Date(l.ct).toISOString():'']));
+ const csv=rows.map(r=>r.map(v=>'"'+safe(v).replace(/"/g,'""')+'"').join(',')).join('\n');
+ const el=document.createElement('a');el.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));el.download='reloop-impact.csv';el.click();toast('CSV exported')}
+async function shareImpact(){const a=stats(),t=`I recovered ${Math.round(a.vkg*10)/10} kg of waste with ReLoop AI. Scan it. Sort it. Recover its value.`;try{if(navigator.share)await navigator.share({title:'ReLoop AI',text:t});else{await navigator.clipboard.writeText(t);toast('Copied to clipboard')}}catch(e){}}
+(function(){let t;try{t=localStorage.getItem('rl_theme')}catch(e){}if(t)document.documentElement.dataset.theme=t;
+ $('theme').onclick=()=>{const cur=document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'),n=cur==='dark'?'light':'dark';document.documentElement.dataset.theme=n;try{localStorage.setItem('rl_theme',n)}catch(e){}}})();
+let map,me,userPos=null,lastScan=null,llState=0;const slotSel={},fx=n=>Math.round(n*10)/10;
+$('rv').innerHTML='<option value="">View as: all recyclers</option>'+R.map(r=>`<option>${r.n}</option>`).join('');
+const hav=(a,b,c,d)=>{const r=x=>x*Math.PI/180,h=Math.sin(r(c-a)/2)**2+Math.cos(r(a))*Math.cos(r(c))*Math.sin(r(d-b)/2)**2;return 12742*Math.asin(Math.sqrt(h))};
+const dist=r=>userPos?hav(userPos.lat,userPos.lng,r.lat,r.lng):null;
+function slots(){const o=[];for(let i=1;i<=3;i++){const d=new Date();d.setDate(d.getDate()+i);const n=d.toLocaleDateString([],{weekday:'short',day:'numeric',month:'short'});o.push(n+' · Morning',n+' · Afternoon')}return o}
+function autoZone(){if(!userPos)return;const k=$('lCat').value,c=R.filter(r=>r.acc.includes(k)).map(dist);if(!c.length)return;const m=Math.min(...c);$('lZone').value=m<=3?1:m<=8?2:3}
+function useScan(){if(lastScan){$('lCat').value=lastScan.k;if(lastScan.item&&!$('lItem').value)$('lItem').value=lastScan.item}autoZone();go('market')}
+function locate(){if(!navigator.geolocation){toast('Location is not supported here');return}navigator.geolocation.getCurrentPosition(p=>{userPos={lat:p.coords.latitude,lng:p.coords.longitude};autoZone();render();toast('Location set · distances updated')},()=>toast('Location permission denied'),{timeout:8000})}
+function loadMap(){if(!$('v-market').classList.contains('on'))return;
+ if(window.L&&window.L.map){drawMap();return}
+ if(llState)return;llState=1;const l=document.createElement('link');l.rel='stylesheet';l.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';document.head.appendChild(l);
+ const sc=document.createElement('script');sc.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';sc.onload=drawMap;sc.onerror=()=>{$('map').innerHTML='<p class="note" style="padding:14px">Map could not load. Check your connection.</p>'};document.head.appendChild(sc)}
+function drawMap(){const LF=window.L;if(!LF||!LF.map)return;
+ if(!map){map=LF.map('map',{scrollWheelZoom:false}).setView([22.7196,75.8577],11);LF.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© OpenStreetMap contributors'}).addTo(map);
+  R.forEach(r=>LF.marker([r.lat,r.lng]).addTo(map).bindPopup(`<b>${esc(r.n)}</b><br>${r.acc.map(x=>C[x].n).join(', ')}<br><i>demo record</i>`))}
+ if(userPos&&!me){me=LF.circleMarker([userPos.lat,userPos.lng],{radius:8,color:'#14513a',fillColor:'#b8f43c',fillOpacity:1}).addTo(map).bindPopup('You are here');map.setView([userPos.lat,userPos.lng],11)}
+ setTimeout(()=>map.invalidateSize(),60)}
+function certificate(){const real=L.filter(l=>l.s===2&&!l.d),kg=real.reduce((a,l)=>a+l.q,0);if(!real.length){toast('Complete a real pickup first');return}
+ const name=(prompt('Name for the certificate (optional)','')||'').slice(0,40),co2=real.reduce((a,l)=>a+l.q*C[l.c].co2,0),cv=document.createElement('canvas');cv.width=1200;cv.height=760;const x=cv.getContext('2d');
+ x.fillStyle='#0b2a1a';x.fillRect(0,0,1200,760);x.strokeStyle='#b8f43c';x.lineWidth=5;x.strokeRect(34,34,1132,692);x.textAlign='center';
+ x.fillStyle='#b8f43c';x.font='700 26px Inter,sans-serif';x.fillText('RELOOP AI  ·  IMPACT CERTIFICATE',600,125);
+ x.fillStyle='#f4f3ea';x.font='500 28px Inter,sans-serif';x.fillText(name?'Awarded to '+name:'Awarded for responsible recycling',600,200);
+ x.font='800 84px Inter,sans-serif';x.fillText(fx(kg)+' kg recovered',600,340);
+ x.font='500 30px Inter,sans-serif';x.fillStyle='#c5d8c9';x.fillText('≈ '+Math.round(co2)+' kg CO₂ avoided (estimate)  ·  '+real.length+' completed pickup'+(real.length>1?'s':''),600,420);
+ x.fillText(new Date().toLocaleDateString([],{day:'numeric',month:'long',year:'numeric'}),600,500);
+ x.font='400 20px Inter,sans-serif';x.fillText('Self-recorded in the ReLoop AI demo. Figures are indicative estimates, not an audited or official record.',600,670);
+ cv.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='reloop-certificate.png';a.click();toast('Certificate downloaded')})}
+go('home');reload();setInterval(reload,10000);
+</script></body></html>

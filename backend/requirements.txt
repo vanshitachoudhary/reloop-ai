@@ -1,0 +1,2 @@
+# Lambda already ships boto3; this file is for local runs and hosts that expect one.
+boto3
